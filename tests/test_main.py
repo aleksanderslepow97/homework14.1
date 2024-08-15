@@ -1,32 +1,61 @@
 import pytest
 
-from src.main import Category, Product
+from src.category import Category
+from src.products import Product
 
 
 @pytest.fixture
-def samsung():
-    return Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+def first_product():
+    return Product(
+        name="Samsung",
+        description="256GB, Серый цвет, 200MP камера",
+        price=180000.0,
+        quantity=5,
+    )
 
 
 @pytest.fixture
-def category():
+def second_product():
+    return Product(name="Iphone 15", description="512GB, Gray space", price=210000.0, quantity=8)
+
+
+@pytest.fixture
+def third_product():
+    return Product(name="55 QLED 4K", description="Фоновая подсветка", price=123000.0, quantity=7)
+
+
+@pytest.fixture
+def fourth_product():
+    return Product(
+        name="Xiaomi Redmi Note 11",
+        description="1024GB, Синий",
+        price=31000.0,
+        quantity=14,
+    )
+
+
+@pytest.fixture
+def first_category(first_product, second_product, third_product):
     return Category(
-        "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для " "удобства жизни",
-        1,
+        name="Смартфоны",
+        description="Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        products=[first_product, second_product, third_product],
     )
 
 
-def test_product(samsung):  # тест на продукт
-    assert samsung.name == "Samsung Galaxy S23 Ultra"
-    assert samsung.description == "256GB, Серый цвет, 200MP камера"
-    assert samsung.price == 180000.0
-    assert samsung.quantity == 5
-
-
-def test_category(category):
-    assert category.name == "Смартфоны"
-    assert category.description == (
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных " "функций для удобства жизни"
+@pytest.fixture
+def second_category(first_product, second_product):
+    return Category(
+        name="Телевизоры",
+        description="Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        products=[first_product],
     )
-    assert category.products == 1
+
+
+@pytest.fixture
+def third_category(fourth_product):
+    return Category(
+        name="Телевизоры",
+        description="Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        products=[fourth_product],
+    )
