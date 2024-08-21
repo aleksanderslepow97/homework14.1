@@ -1,35 +1,20 @@
-import pytest
+def test_category_init(category_1, category_2, category_3):
+    assert category_1.name == "Бытовая техника"
+    assert category_1.description == "Техника для дома и быта"
+    assert len(category_1.products_list) == 3
+    assert category_1.category_count == 3
+    assert category_2.category_count == 3
+    assert category_3.category_count == 3
+    assert len(category_3.products_list) == 1
 
 
-def test_category(first_category, second_category):
-    assert first_category.name == "Category"
-    assert first_category.description == "Description of the category"
-    assert (
-        first_category.get_product_list
-        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт.\n"
-    )
-
-    assert first_category.category_count == 2
-    assert second_category.category_count == 2
-
-    assert first_category.product_count == 5
-    assert second_category.product_count == 5
+def test_category_str(category_3):
+    assert category_3.products == "Насос, 3000 руб. Остаток: 25 шт.\n"
 
 
-def test_cat_get_product_list_property(first_category, second_category):
-    with pytest.raises(AttributeError):
-        print(first_category.__products)
-    assert (
-        first_category.get_product_list
-        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт.\n"
-    )
-    assert (
-        second_category.get_product_list
-        == "Product, 84.5 руб. Остаток: 10 шт.\nProduct number two, 155.87 руб. Остаток: 34 шт."
-        "\nProduct three, 8467.56 руб. Остаток: 32 шт.\n"
-    )
+def test_add_product(category_3, product_3):
+    category_3.add_product(product_3)
 
 
-def test_category_str(first_category, second_category):
-    assert str(first_category) == "Category, количество продуктов: 2 шт."
-    assert str(second_category) == "Category number two, количество продуктов: 3 шт."
+def test_str_category(category_1):
+    assert str(category_1) == "Бытовая техника, количество продуктов: 30 шт."

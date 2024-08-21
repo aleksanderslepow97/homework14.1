@@ -1,47 +1,34 @@
-from typing import Any
-
 from src.products import Product
-
-
 class Category:
-    """Категория товара"""
-
-    category_count = 0
-    product_count = 0
-
+    """Класс представления категории продуктов."""
     name: str
     description: str
     products: list
-
+    category_count = 0
+    product_count = 0
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
         self.__products = products
         Category.category_count += 1
-        Category.product_count += len(products)
-        print(Category.product_count)
+        Category.product_count += len(self.products)
 
     def __str__(self):
-        return f"{self.name}, количество продуктов: {len(self.__products)} шт."
+        total_quantity = 0
+        for item in self.__products:
+            total_quantity += item.quantity
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
-    def add_product(self, product: Product) -> Any:
+    @property
+    def products(self):
+        products_str = ""
+        for product in self.__products:
+            products_str += f"{str(product)}\n"
+        return products_str
+
+    @property
+    def products_list(self):
+        return self.__products
+    def add_product(self, product: Product):
         self.__products.append(product)
         Category.product_count += 1
-
-    @property
-    def get_product_list(self) -> str:
-        product_list = ""
-        for product in self.__products:
-            product_list += f"{str(product)}\n"
-        return product_list
-
-    @property
-    def products(self) -> list:
-        products_list = []
-        for product in self.__products:
-            products_list.append(product)
-        return products_list
-
-
-# result = Category("Product", "Description", ["product1", "product2", "product3"])
-# print(result)

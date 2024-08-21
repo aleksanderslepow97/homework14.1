@@ -1,11 +1,9 @@
 class Product:
-    """Продукт"""
-
+    """Класс представления продукта."""
     name: str
     description: str
-    price: float
+    price: int | float
     quantity: int
-
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
@@ -13,27 +11,26 @@ class Product:
         self.quantity = quantity
 
     def __str__(self):
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        return self.quantity * self.price + other.quantity * other.price
-
-    @classmethod
-    def new_product(cls, new_product: dict):
-        """Взвращает созданный объект класса Product из параметров товара в словаре"""
-        name = new_product["name"]
-        description = new_product["description"]
-        price = new_product["price"]
-        quantity = new_product["quantity"]
-        return cls(name, description, price, quantity)
+        return self.__price * self.quantity + other.__price * other.quantity
 
     @property
     def price(self):
         return self.__price
-
     @price.setter
-    def price(self, value):
-        if value <= 0:
-            print("Цена не должна быть нулевая или орицательная")
-        else:
-            self.__price = value
+    def price(self, new_price):
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+        elif new_price < self.__price:
+            user_answer = input("Подтвердите снижение цены. Введите y/n: ")
+            if user_answer == "y":
+                self.__price = new_price
+            elif user_answer == "n":
+                self.__price = self.__price
+        elif new_price > self.__price:
+            self.__price = new_price
+    @classmethod
+    def new_product(cls, kwargs):
+        return cls(**kwargs)
