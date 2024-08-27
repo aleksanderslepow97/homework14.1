@@ -9,7 +9,7 @@ from src.smartphone import Smartphone
 @pytest.fixture
 def product():
     return Product(
-        name="Samsung Galaxy S23 Ultra", description="256GB, РЎРµСЂС‹Р№ С†РІРµС‚, 200MP РєР°РјРµСЂР°", price=180000.0, quantity=5
+        name="Samsung Galaxy S23 Ultra", description="256GB, Серый цвет, 200MP камера", price=180000.0, quantity=5
     )
 
 
@@ -26,11 +26,11 @@ def product_3():
 @pytest.fixture
 def category_1():
     return Category(
-        name="РЎРјР°СЂС‚С„РѕРЅС‹",
-        description="РЎРјР°СЂС‚С„РѕРЅС‹, РєР°Рє СЃСЂРµРґСЃС‚РІРѕ РЅРµ С‚РѕР»СЊРєРѕ РєРѕРјРјСѓРЅРёРєР°С†РёРё, "
-        "РЅРѕ Рё РїРѕР»СѓС‡РµРЅРёСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… С„СѓРЅРєС†РёР№ РґР»СЏ СѓРґРѕР±СЃС‚РІР° Р¶РёР·РЅРё",
+        name="Смартфоны",
+        description="Смартфоны, как средство не только коммуникации, "
+        "но и получения дополнительных функций для удобства жизни",
         products=[
-            Product("Samsung Galaxy S23 Ultra", "256GB, РЎРµСЂС‹Р№ С†РІРµС‚, 200MP РєР°РјРµСЂР°", 180000.0, 5),
+            Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5),
             Product("Iphone 15", "512GB, Gray space", 210000.0, 8),
         ],
     )
@@ -39,17 +39,17 @@ def category_1():
 @pytest.fixture
 def category_2():
     return Category(
-        name="РўРµР»РµРІРёР·РѕСЂС‹",
-        description="РЎРѕРІСЂРµРјРµРЅРЅС‹Р№ С‚РµР»РµРІРёР·РѕСЂ, РєРѕС‚РѕСЂС‹Р№ РїРѕР·РІРѕР»СЏРµС‚ РЅР°СЃР»Р°Р¶РґР°С‚СЊСЃСЏ РїСЂРѕСЃРјРѕС‚СЂРѕРј, "
-        "СЃС‚Р°РЅРµС‚ РІР°С€РёРј РґСЂСѓРіРѕРј Рё РїРѕРјРѕС‰РЅРёРєРѕРј",
-        products=[Product('55" QLED 4K', "Р¤РѕРЅРѕРІР°СЏ РїРѕРґСЃРІРµС‚РєР°", 123000.0, 7)],
+        name="Телевизоры",
+        description="Современный телевизор, который позволяет наслаждаться просмотром, "
+        "станет вашим другом и помощником",
+        products=[Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)],
     )
 
 
 @pytest.fixture
 def smartphone1():
     return Smartphone(
-        "Samsung Galaxy S23 Ultra", "256GB, РЎРµСЂС‹Р№ С†РІРµС‚, 200MP РєР°РјРµСЂР°", 180000.0, 5, 95.5, "S23 Ultra", 256, "РЎРµСЂС‹Р№"
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
     )
 
 
@@ -60,28 +60,28 @@ def smartphone2():
 
 @pytest.fixture
 def grass1():
-    return LawnGrass("Р“Р°Р·РѕРЅРЅР°СЏ С‚СЂР°РІР°", "Р­Р»РёС‚РЅР°СЏ С‚СЂР°РІР° РґР»СЏ РіР°Р·РѕРЅР°", 500.0, 20, "Р РѕСЃСЃРёСЏ", "7 РґРЅРµР№", "Р—РµР»РµРЅС‹Р№")
+    return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
 
 
 @pytest.fixture
 def grass2():
-    return LawnGrass("Р“Р°Р·РѕРЅРЅР°СЏ С‚СЂР°РІР° 2", "Р’С‹РЅРѕСЃР»РёРІР°СЏ С‚СЂР°РІР°", 450.0, 15, "РЎРЁРђ", "5 РґРЅРµР№", "РўРµРјРЅРѕ-Р·РµР»РµРЅС‹Р№")
+    return LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
 
 
 @pytest.fixture
 def products_json():
     return [
         {
-            "name": "РЎРјР°СЂС‚С„РѕРЅС‹",
-            "description": "РЎРѕРІСЂРµРјРµРЅРЅС‹Рµ СЃРјР°СЂС‚С„РѕРЅС‹",
+            "name": "Смартфоны",
+            "description": "Современные смартфоны",
             "products": [
-                {"name": "Samsung", "description": "РЎРµСЂС‹Р№", "price": 180000.0, "quantity": 5},
+                {"name": "Samsung", "description": "Серый", "price": 180000.0, "quantity": 5},
                 {"name": "Iphone 15", "description": "Gray", "price": 210000.0, "quantity": 8},
             ],
         },
         {
-            "name": "РўРµР»РµРІРёР·РѕСЂС‹",
-            "description": "РЎРѕРІСЂРµРјРµРЅРЅС‹Р№ С‚РµР»РµРІРёР·РѕСЂ",
-            "products": [{"name": '55"', "description": "Р¤РѕРЅРѕРІР°СЏ РїРѕРґСЃРІРµС‚РєР°", "price": 123000.0, "quantity": 7}],
+            "name": "Телевизоры",
+            "description": "Современный телевизор",
+            "products": [{"name": '55"', "description": "Фоновая подсветка", "price": 123000.0, "quantity": 7}],
         },
     ]
