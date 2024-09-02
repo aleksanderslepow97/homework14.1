@@ -1,37 +1,52 @@
-from typing import Any
-
 from src.products import Product
 
 
 class Category:
-    """Категория товара"""
-
-    category_count = 0
-    product_count = 0
+    """Класс для предоставления категорий товаров"""
 
     name: str
     description: str
-    products: list
+    __products: list
+    category_count = 0
+    product_count = 0
 
-    def __init__(self, name, description, products):
+    def __init__(self, name: str, description: str, products: list):
+        """Метод для инициализации экземпляра класса"""
+
         self.name = name
         self.description = description
         self.__products = products
         Category.category_count += 1
         Category.product_count += len(products)
-        print(Category.product_count)
 
-    def add_product(self, product: Product) -> Any:
-        self.__products.append(product)
-        Category.product_count += 1
+    def __str__(self) -> str:
+        """Метод для строкового отображения информации о категории"""
+        quantity = sum([product.quantity for product in self.__products])
+
+        return f"{self.name}, количество продуктов: {quantity}"
 
     @property
-    def get_product_list(self) -> str:
-        product_list = ""
+    def products(self) -> str:
+        """Возвращает список товара в виде строки"""
+        product_str = ""
         for product in self.__products:
-            product_list += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-        return product_list
+            product_str += str(product) + "\n"
 
+        return product_str
 
-# result = Category("Product", "Description", ["product1", "product2", "product3"])
-# print(result)
+    def add_product(self, product: Product) -> None:
+        """Добавляет продукт в список продуктов категории"""
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError
+
+    def middle_price(self):
+        """Подсчитывает средний ценник всех товаров"""
+        try:
+            avg_price = sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            avg_price = 0
+
+        return avg_price

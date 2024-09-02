@@ -1,37 +1,30 @@
 import json
 import os
-from typing import Any
 
+from config import DATA_DIR
 from src.category import Category
 from src.products import Product
 
 
-def read_json_file(path: str) -> Any:
-    """Конвертирует файл json в словарь"""
-    full_path = os.path.abspath(path)
-    with open(full_path, "r", encoding="UTF-8") as file:
-        data = json.load(file)
-    return data
+def read_json(filename: str) -> object:
+    """Считывает данные из JSON-файла и на их основе создает объекты классов"""
+    file_path = os.path.join(DATA_DIR, filename)
 
+    with open(file_path, encoding="utf-8") as file:
+        products_data = json.load(file)
 
-result = read_json_file("..//data/products.json")
-
-
-def create_object_from_json(data: dict) -> Any:
-    """Преобразует данные из словаря в объекты класса"""
     categories = []
-    for category in data:
+
+    for category in products_data:
         products = []
+
         for product in category["products"]:
             products.append(Product(**product))
-            name = category["name"]
-            description = category["description"]
-            # price = category["price"]
-            # quantity = category["quantity"]
-            category_instance = Category(name, description, products)
-            categories.append(category_instance)
-        return categories
+        category["products"] = products
+
+        categories.append(Category(**category))
+
+    return categories
 
 
-result_2 = create_object_from_json(result)
-print(result_2)
+print(read_json("products.json"))
